@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 
 {% block head %}
+<script src="{{ url_for('static', filename='scripts/socket.io.min.js') }}"></script>
 {% endblock %}
 
 {% block body %}
-<p>Hi</p>
+<header>
+  <h1>Play.</h1>
+</header>
+<footer></footer>
 {% endblock %}
