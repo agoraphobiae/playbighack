@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% if title %}{{title}}{% else %}Play BigHack{% endif %}</title>
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+
+  <link href="{{ url_for('static', filename='common.css') }}" rel='stylesheet' type='text/css'>
+  {% block head %}
+  {% endblock %}
+</head>
+<body>
+{% block content %}
+{% endblock %}
+</body>
+</html>
