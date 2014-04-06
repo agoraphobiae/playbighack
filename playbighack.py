@@ -135,9 +135,11 @@ class PlayNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
 
     def on_message(self, msg):
         self.log('got a message: %s' % msg)
-        self.emit_to_room(self.room, 'room message',
-            self.session['email'], msg)
-        return True
+        # self.emit_to_room(self.room, 'room message',
+        #     self.session['email'], msg)
+        self.broadcast_event_not_me("room message", 
+            {'sender':self.session['email'], 'content':msg})
+        return True, msg
 
     def on_playback(self, play):
         self.log('got a playback request')

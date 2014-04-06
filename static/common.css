@@ -8,6 +8,10 @@ body {
 	font-family: "Lato", sans-serif;
 }
 
+b {
+	font-weight: 700;
+}
+
 #nameplate {
 	font-size: 3em;
 	text-align: center;
@@ -95,11 +99,33 @@ input[type="text"].fat_input {
 	top: 0;
 	height: 100%;
 
+	font-size: 0.9em;
+
 	width: 200px;
+	overflow: auto;
+	background-color: #343434;
+}
+.message_box {
+	border: 0;
+	font-family: "Lato", sans-serif;
+	position: relative;
+	margin: 2px;
+	padding: 1px;
+	height: 20px;
+}
+#chat ul {
+	list-style: none;
+	padding-left: 15px;
 }
 
 .compose-message-form {
 	bottom: 0;
 	position: absolute;
 	right: 0;
+}
+.compose-message-form input[type=submit]{
+	border: 0;
+	background-color: #3FA9F5;
+	font-family: "Montserrat", sans-serif;
+	height: 20px;
 }

@@ -161,6 +161,7 @@ $(document).ready( function() {
                                     "<b>Me</b>: " + msg
                                 )
                             );
+                            $(".message_box").val("");
                         }
                     });
             }
@@ -169,7 +170,7 @@ $(document).ready( function() {
         chatAPI.onMessage = function(msg) {
             $(".messages").append(
                 jQuery("<li>").html(
-                    "<b>"+msg.sender+"</b>"+msg.content
+                    "<b>"+msg.sender+"</b>: "+msg.content
                 )
             );
         };
@@ -221,9 +222,25 @@ $(document).ready( function() {
 
 
     // UX stuff
+    function YouTubeGetID(url){
+      // takien on github
+      var ID = '';
+      url = url.replace(/(>|<)/gi,'').split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+      if(url[2] !== undefined) {
+        ID = url[2].split(/[^0-9a-z_]/i);
+        ID = ID[0];
+      }
+      else {
+        ID = url;
+      }
+        return ID;
+    }
 
     $("#plus").click( function() {
-        player.loadVideoByUrl($("#add_url").val(), 0, 'default');
+        player.loadVideoById(
+            YouTubeGetID($("#add_url").val()), 0, 'default');
         $("#add_url").val("");
+        preloading = true;
+        onPlayerReady(null);
     });
 });
