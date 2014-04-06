@@ -187,7 +187,7 @@ $(document).ready( function() {
             }
         });
 
-        chatAPI.onPlayBack = function(played, play) {
+        chatAPI.onPlayBack = function(play) {
             if(play) { player.playVideo(); }
             else { player.pauseVideo(); }
         };
