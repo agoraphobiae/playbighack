@@ -23,13 +23,69 @@ body {
 	margin-top: -20px;
 }
 
+.create_room_form {
+	text-align: center;
+}
+.create_room_form input {
+	margin:10px auto;
+	display: block;
+}
+input[type="text"].fat_input {
+	font-size: 2em;
+	text-align: center;
+	border: 1px solid white;
+	font-family: "Lato", sans-serif;
+
+	width: 325px;
+}
+.create_room_form input[type=submit] {
+	font-size: 2em;
+	text-align: center;
+	font-family: "Montserrat", sans-serif;
+	border: 0;
+	background-color: #3FA9F5;
+	padding: 10px 20px;
+	border-radius: 5px;
+	color: #DDD;
+
+	width: 325px;
+	margin: 15px auto;
+}
+#push {
+	margin-top: 100px;
+	text-align: center;
+	font-size: 1.25em;
+}
+
+#icons {
+	text-align: center;
+}
+#plus {
+	background: #3FA9F5;
+	width: 35px;
+	height: 100px;
+	position: relative;
+	margin-left: 33px;
+
+	margin: 20px auto;
+}
+#plus:before {
+	background: #3FA9F5;
+	content: "";
+	width: 100px;
+	height: 35px;
+	position: absolute;
+	top: 33px;
+	left: -33px;
+}
+
 .center {
 	margin: 0 auto;
 	width: 55%;
 }
 
 #video_wrap {
-	margin: 0 auto;
+	margin: 20px auto;
 	text-align: center;
 }
 

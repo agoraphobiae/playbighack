@@ -100,7 +100,6 @@ $(document).ready( function() {
 
             var WEB_SOCKET_SWF_LOCATION = '/static/scripts/WebSocketMain.swf';
             
-            alert("new ioconnect");
             this.socket = io.connect('/play');
             this.socket.on('connect', done);
 
@@ -130,7 +129,7 @@ $(document).ready( function() {
         },
 
         join : function(room, onJoin) {
-            alert("making room api call");
+            // alert("making room api call");
             this.socket.emit('join', room, onJoin);
         }
     };
@@ -194,7 +193,7 @@ $(document).ready( function() {
 
         $(".create_room_form").validate({
             submitHandler: function(form) {
-                alert("validating room form");
+                // alert("validating room form");
                 chatAPI.join( $(form).find("[name='roomname']").val(),
                     function(roomed) {
                         if(roomed) {
@@ -219,4 +218,12 @@ $(document).ready( function() {
     // });
 
     // }($, jQuery, window, player));
+
+
+    // UX stuff
+
+    $("#plus").click( function() {
+        player.loadVideoByUrl($("#add_url").val(), 0, 'default');
+        $("#add_url").val("");
+    });
 });

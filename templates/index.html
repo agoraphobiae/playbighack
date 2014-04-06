@@ -12,10 +12,32 @@
     <div id="catchphrase">Your favorite tracks. Listen to and curate playlists collaboratively.</div>
   </header>
 
+  <div id="push">Name your jam sesh:</div>
   <div id="create_room">
     <form class="create_room_form" method="post" action="{{ url_for('create') }}">
-      <input type="text" id="roomname" name="roomname">
-      <input type="submit" id="submit" value="Get on a train">
+      <input type="text" id="roomname" name="roomname" class="fat_input">
+      <input type="submit" id="submit" value="GET ON A TRAIN">
+    </form>
+  </div>
+
+  <div id="icons" style="display:none;">
+    <input type="text" id="add_url" name="add_url">
+    <div id="plus">
+    </div>
+  </div>
+
+  <div id="chat" style="display:none;">
+    <form class="join-chat">
+      <label>Type an email to join chat</label>
+      <input name="email" type="email">
+      <input type="submit" value="join">
+    </form>
+
+    <ul class="messages" style="display:none;"></ul>
+
+    <form class="compose-message-form" style="display:none;">
+      <textarea name="message"></textarea>
+      <input type="submit" value="send">
     </form>
   </div>
 
