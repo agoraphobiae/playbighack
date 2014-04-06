@@ -110,6 +110,7 @@ $(document).ready( function() {
             });
 
             this.socket.on('playback', function(played, play) {
+                alert("received playback with " + played + " " + play);
                 if(that.onPlayBack) {
                     that.onPlayBack(play);
                 }
