@@ -109,7 +109,7 @@ $(document).ready( function() {
                 }
             });
 
-            this.socket.on('playback', function(play) {
+            this.socket.on('playback', function(played, play) {
                 if(that.onPlayBack) {
                     that.onPlayBack(play);
                 }
@@ -187,7 +187,7 @@ $(document).ready( function() {
             }
         });
 
-        chatAPI.onPlayBack = function(play) {
+        chatAPI.onPlayBack = function(played, play) {
             if(play) { player.playVideo(); }
             else { player.pauseVideo(); }
         };
