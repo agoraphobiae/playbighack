@@ -13,6 +13,13 @@
                     that.onMessage(msg);
                 }
             });
+
+            this.socket.on('playback', function(play) {
+                alert("received an api call");
+                if(that.onPlayBack) {
+                    that.onPlayBack(play);
+                }
+            });
         },
 
         join : function(email, onJoin) {
@@ -21,6 +28,10 @@
 
         sendMessage : function(msg, onSent) {
             this.socket.emit('message', msg, onSent);
+        },
+
+        sendPlayback : function(play, onPlay) {
+            this.socket.emit('playback', play, onPlay);
         }
     };
 
@@ -60,6 +71,21 @@
                     "<b>"+msg.sender+"</b>"+msg.content
                 )
             );
+        };
+
+        $(".playercontrols").validate({
+            submitHandler: function(form) {
+                chatAPI.sendPlayback( true, 
+                    function(played, play) {
+                        if(played) {
+
+                        }
+                    });
+            }
+        });
+
+        chatAPI.onPlayBack = function(play) {
+            alert("someone else played");
         };
     };
 

@@ -11,7 +11,18 @@
   <h1>Play.</h1>
 </header>
 
-<section>
+<div id="video_wrap">
+  <form class="playercontrols">
+    <input type="submit" value="play">
+  </form>
+
+  <!-- replaced in js by the vid itself -->
+  <div id="player"></div>
+
+  <script src="{{ url_for('static', filename='scripts/player.js') }}"></script>
+</div>
+
+<div id="chat">
   <form class="join-chat">
     <label>Type an email to join chat</label>
     <input name="email" type="email">
@@ -24,7 +35,7 @@
     <textarea name="message" required></textarea>
     <input type="submit" value="send">
   </form>
-</section>
+</div>
 
 
 <footer>

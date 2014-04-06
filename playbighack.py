@@ -49,3 +49,8 @@ class PlayNamespace(BaseNamespace, BroadcastMixin):
             "sender" : self.session["email"],
             "content" : msg})
         return True, msg
+
+    def on_playback(self, play):
+        self.log('got a playback request')
+        self.broadcast_event_not_me("playback", play)
+        return True, play
