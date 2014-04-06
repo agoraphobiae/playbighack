@@ -28,15 +28,6 @@ db = SQLAlchemy(application)
 def index():
     return render_template("index.html")
 
-@application.route('/socket.io/<path:endpt>')
-def socketio(endpt):
-    try:
-        socketio_manage(request.environ, {'/play': PlayNamespace}, request)
-    except:
-        application.logger.error("Exception while handling socketio connection",
-                exc_info=True)
-        return Response()
-
 @application.route('/<path:slug>')
 def room(slug):
     context = {"room": get_object_or_404(ChatRoom, slug=slug)}
@@ -45,11 +36,11 @@ def room(slug):
 @application.route('/create', methods=['POST'])
 def create():
     # creates a new room and redirects to it
-    name = request.form.get("name")
+    name = request.form.get("roomname")
     if name:
         room, create = get_or_create(ChatRoom, name=name)
         return redirect(url_for('room', slug=room.slug))
-    return redirect(url_for('rooms'))
+    return redirect(url_for('/'))
 
 
 # db models
@@ -120,24 +111,31 @@ class PlayNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
     def log(self, msg):
         self.logger.info("[%s] {%s}"%(self.socket.sessid, msg))
 
-    def recv_connect(self):
-        self.log("New connection")
+    # def recv_connect(self):
+    #     self.log("New connection")
+    #     self.connect()
 
     def recv_disconnect(self):
         self.log("Client disconnected")
+        self.names.remove(self.session['email'])
+        self.disconnect(silent=True)
+        return True
 
-    def on_join(self, name):
-        self.log("%s join chat" % name)
+    def on_register(self, name):
+        self.log("%s registered" % name)
         self.session['email'] = name
+        self.names.append(name)
         return True, name
 
-    def on_room(self, room):
+    def on_join(self, room):
+        self.log("room %s accessed"%room)
         self.room = room
         self.join(room)
+        return True
 
     def on_message(self, msg):
         self.log('got a message: %s' % msg)
-        self.emit_to_room(self.room, 'room message', self.session["email"],
+        self.emit_to_room(self.room, 'room message',
             self.session['email'], msg)
         return True
 
@@ -145,6 +143,19 @@ class PlayNamespace(BaseNamespace, RoomsMixin, BroadcastMixin):
         self.log('got a playback request')
         self.broadcast_event_not_me("playback", play)
         return True, play
+
+
+
+
+@application.route('/socket.io/<path:remaining>')
+def socketio(remaining):
+    # application.logger.info('accessing endpt %s'%endpt)
+    try:
+        socketio_manage(request.environ, {'/play': PlayNamespace}, request)
+    except:
+        application.logger.error("Exception while handling socketio connection",
+                exc_info=True)
+    return Response()
 
 # gonna need this
 def init_db():

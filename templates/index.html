@@ -13,12 +13,12 @@
   </header>
 
   <div id="create_room">
-    <form method="post" action="{{ url_for('create') }}">
-      <input type="text" name="name">
-      <input type="submit" value="Get on a train">
+    <form class="create_room_form" method="post" action="{{ url_for('create') }}">
+      <input type="text" id="roomname" name="roomname">
+      <input type="submit" id="submit" value="Get on a train">
     </form>
   </div>
-  
+
 
   <footer>
   </footer>
