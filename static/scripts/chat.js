@@ -19,11 +19,12 @@ function onYouTubeIframeAPIReady() { // execute as soon as api done
       'onStateChange': onPlayerStateChange
     }
   });
-  globals.player = player;
 }
 
 function onPlayerReady(event) {
-  // event.target.playVideo();
+  // being preloading
+  player.playVideo();
+  player.stopVideo();
 }
 
 function stopVideo() {
@@ -42,7 +43,6 @@ function stopVideo() {
 // as chat API
 function onPlayerStateChange(event) {
     if(event.data == YT.PlayerState.PLAYING) {
-        alert("sending playing api call");
         chatAPI.sendPlayback( true,
             function(played, play) {
                 if(played) {
@@ -69,7 +69,6 @@ var chatAPI = {
         });
 
         this.socket.on('playback', function(play) {
-            alert("received an api call");
             if(that.onPlayBack) {
                 that.onPlayBack(play);
             }
@@ -132,14 +131,14 @@ var bindUI = function() {
             chatAPI.sendPlayback( true, 
                 function(played, play) {
                     if(played) {
-
+                        player.playVideo();
                     }
                 });
         }
     });
 
     chatAPI.onPlayBack = function(play) {
-        alert("someone else played");
+        player.playVideo();
     };
 };
 
