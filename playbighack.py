@@ -40,9 +40,12 @@ class PlayNamespace(BaseNamespace, BroadcastMixin):
 
     def on_join(self, name):
         self.log("%s join chat" % name)
+        self.session['email'] = name
         return True, name
 
     def on_message(self, msg):
         self.log('got a message: %s' % msg)
-        self.broadcast_event_not_me("message", msg)
+        self.broadcast_event_not_me("message", {
+            "sender" : self.session["email"],
+            "content" : msg})
         return True, msg
