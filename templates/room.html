@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+<div class="center">
+
+
+  <header>
+    <div id="nameplate">JamTrain</div>
+    <div id="catchphrase">Your favorite tracks. Listen to and curate playlists collaboratively.</div>
+  </header>
+
+  <div id="video_wrap">
+<!--     <form class="playercontrols">
+      <input type="submit" value="play">
+    </form> -->
+
+    <!-- replaced in js by the vid itself -->
+    <div id="player"></div>
+  </div>
+
+  <div id="chat">
+    <form class="join-chat">
+      <label>Type an email to join chat</label>
+      <input name="email" type="email">
+      <input type="submit" value="join">
+    </form>
+
+    <ul class="messages" style="display:none;"></ul>
+
+    <form class="compose-message-form" style="display:none;">
+      <textarea name="message"></textarea>
+      <input type="submit" value="send">
+    </form>
+  </div>
+
+
+  <footer>
+  </footer>
+</div>
+{% endblock %}

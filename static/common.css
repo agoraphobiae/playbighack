@@ -1,0 +1,49 @@
+body {
+	margin: 0;
+	height: 100%;
+	width: 100%;
+	background-color: #333;
+	color: #EEE;
+
+	font-family: "Lato", sans-serif;
+}
+
+#nameplate {
+	font-size: 3em;
+	text-align: center;
+	margin: 20px 0;
+
+	font-family: "Montserrat", sans-serif;
+	color: #C73E3B;
+}
+#catchphrase {
+	text-align: center;
+	font-size: 1.5em;
+	margin: 20px 0;
+	margin-top: -20px;
+}
+
+.center {
+	margin: 0 auto;
+	width: 55%;
+}
+
+#video_wrap {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#chat {
+	position: fixed;
+	right: 0;
+	top: 0;
+	height: 100%;
+
+	width: 200px;
+}
+
+.compose-message-form {
+	bottom: 0;
+	position: absolute;
+	right: 0;
+}

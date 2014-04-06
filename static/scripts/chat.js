@@ -23,6 +23,7 @@ function onYouTubeIframeAPIReady() { // execute as soon as api done
 
 function onPlayerReady(event) {
   // being preloading
+  // TODO: known bug: this sends the API calls as well
   player.playVideo();
   var checkUntilLoad = function() {
     var loaded = player.getVideoLoadedFraction();
@@ -31,6 +32,7 @@ function onPlayerReady(event) {
     } else {
         console.log(loaded);
         player.pauseVideo();
+        // player.seekTo(0, false);
     }
   }
   setTimeout(function() {
@@ -80,7 +82,7 @@ var chatAPI = {
         this.socket = io.connect('/play');
         this.socket.on('connect', done);
 
-        this.socket.on('message', function(msg) {
+        this.socket.on('room message', function(msg) {
             if(that.onMessage) {
                 that.onMessage(msg);
             }
@@ -123,6 +125,9 @@ var bindUI = function() {
 
     $(".compose-message-form").validate({
         submitHandler: function(form) {
+            if($(form).find("[name='message']").val().trim() == "") {
+                return false;
+            }
             chatAPI.sendMessage( $(form).find("[name='message']").val(),
                 function(sent, msg) {
                     if(sent) {
