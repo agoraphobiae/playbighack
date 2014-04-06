@@ -3,6 +3,8 @@
 {% block head %}
 <script src="{{ url_for('static', filename='scripts/socket.io.min.js') }}"></script>
 
+<!-- preserver order -->
+<!-- <script src="{{ url_for('static', filename='scripts/player.js') }}"></script> -->
 <script src="{{ url_for('static', filename='scripts/chat.js') }}"></script>
 {% endblock %}
 
@@ -18,8 +20,6 @@
 
   <!-- replaced in js by the vid itself -->
   <div id="player"></div>
-
-  <script src="{{ url_for('static', filename='scripts/player.js') }}"></script>
 </div>
 
 <div id="chat">
