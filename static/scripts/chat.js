@@ -24,7 +24,18 @@ function onYouTubeIframeAPIReady() { // execute as soon as api done
 function onPlayerReady(event) {
   // being preloading
   player.playVideo();
-  player.stopVideo();
+  var checkUntilLoad = function() {
+    var loaded = player.getVideoLoadedFraction();
+    if(loaded == 0) {
+        setTimeout(checkUntilLoad, 100);
+    } else {
+        console.log(loaded);
+        player.pauseVideo();
+    }
+  }
+  setTimeout(function() {
+    checkUntilLoad()
+  }, 100);
 }
 
 function stopVideo() {
@@ -46,9 +57,16 @@ function onPlayerStateChange(event) {
         chatAPI.sendPlayback( true,
             function(played, play) {
                 if(played) {
-                //update UI
+                    //update UI
             }
         });
+    } else if (event.data == YT.PlayerState.PAUSED) {
+        chatAPI.sendPlayback( false, 
+            function(played, play) {
+                if(played) {
+                    //update UI
+                }
+            })
     }
 }
 
@@ -131,14 +149,16 @@ var bindUI = function() {
             chatAPI.sendPlayback( true, 
                 function(played, play) {
                     if(played) {
-                        player.playVideo();
+                        if(play) { player.playVideo(); }
+                        else { player.pauseVideo();}
                     }
                 });
         }
     });
 
     chatAPI.onPlayBack = function(play) {
-        player.playVideo();
+        if(play) { player.playVideo(); }
+        else { player.pauseVideo(); }
     };
 };
 
