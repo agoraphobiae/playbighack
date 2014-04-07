@@ -123,9 +123,13 @@ input[type="text"].fat_input {
 	position: absolute;
 	right: 0;
 }
-.compose-message-form input[type=submit]{
+.blue_submit {
 	border: 0;
 	background-color: #3FA9F5;
 	font-family: "Montserrat", sans-serif;
 	height: 20px;
+}
+
+.join-chat input[type="text"]{
+	
 }
